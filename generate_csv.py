@@ -32,7 +32,7 @@ def generate_one_transaction(customer_id, current_date):
     transaction_data["TransactionID"] = random.choice(transaction_ids)
     transaction_data["Date"] = str(current_date)
     transaction_data["ProductID"] = random.choice(product_ids)
-    transaction_data["Quantity"] = random.randint(1,5)
+    transaction_data["Quantity"] = random.randint(1, 5)
     price = get_product_price(transaction_data["ProductID"])
     transaction_data["Price"] = round(price * transaction_data["Quantity"],2)
     transaction_data["StoreLocation"] = random.choice(store_location)
@@ -55,22 +55,8 @@ def write_to_csv(data, filename):
         writer.writeheader()
         writer.writerows(data)
 
-def generate_data(current_date, date_str):
+def generate_data():
     transactions = generate_transactions(transactions_per_day, current_date)
-    write_to_csv(transactions, f"/tmp/sales_{date_str}.csv")
-    print(f"Generated mock sales data sales_{date_str}.csv and saved in s3 bucket")
+    write_to_csv(transactions, f"/tmp/sales.csv")
+    print(f"Generated mock sales data sales.csv and saved in s3 bucket")
     return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
