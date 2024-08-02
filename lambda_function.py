@@ -5,7 +5,7 @@ from datetime import date, timedelta, datetime
 
 
 def lambda_handler(event, context):
-    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    timestamp = datetime.now().strftime("%X")
     # Generate Date
     generate_data()
     # Upload the generated CSV to S3
