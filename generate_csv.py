@@ -72,3 +72,4 @@ def generate_data(current_date, date_str):
 
 
 
+
