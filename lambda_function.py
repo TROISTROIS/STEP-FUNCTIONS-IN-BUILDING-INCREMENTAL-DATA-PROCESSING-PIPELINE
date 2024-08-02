@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     # Generate Date
     generate_data()
     # Upload the generated CSV to S3
-    upload_to_s3(f"sales_{timestamp}.csv")
+    upload_to_s3(f"sales_{timestamp}.csv", timestamp)
 
     return {
         'statusCode': 200,
