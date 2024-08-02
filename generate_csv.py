@@ -55,7 +55,7 @@ def write_to_csv(data, filename):
         writer.writeheader()
         writer.writerows(data)
 
-def generate_data(current_date, timestamp):
+def generate_data(timestamp):
     transactions = generate_transactions(transactions_per_day, current_date)
     write_to_csv(transactions, f"/tmp/sales_{timestamp}.csv")
     print(f"Generated mock sales data sales_{timestamp}.csv and saved in s3 bucket")
