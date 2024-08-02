@@ -6,8 +6,7 @@ from datetime import date, timedelta, datetime
 
 def lambda_handler(event, context):
     timestamp = datetime.now().strftime("%X")
-    # Generate Date
-    generate_data()
+    generate_data(timestamp)
     # Upload the generated CSV to S3
     upload_to_s3(f"sales_{timestamp}.csv", timestamp)
 
