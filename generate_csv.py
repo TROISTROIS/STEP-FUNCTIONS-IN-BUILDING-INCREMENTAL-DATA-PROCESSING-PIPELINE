@@ -6,7 +6,7 @@ from random import randint, choice
 
 fake = Faker()
 
-transactions_per_day = 76
+transactions_per_day = 60
 current_date = datetime.date.today()
 
 transaction_ids = [fake.unique.bothify("T#####") for _ in range(transactions_per_day)]
