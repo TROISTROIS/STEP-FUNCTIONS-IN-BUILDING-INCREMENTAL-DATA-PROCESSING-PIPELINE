@@ -6,7 +6,7 @@ from random import randint, choice
 
 fake = Faker()
 
-transactions_per_day = 60
+transactions_per_day = 84
 current_date = datetime.date.today()
 
 transaction_ids = [f'T{str(i).zfill(5)}' for i in range(1, 101)]  # Generate T00001 to T00100
