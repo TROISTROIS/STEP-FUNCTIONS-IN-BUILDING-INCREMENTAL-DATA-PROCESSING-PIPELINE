@@ -10,6 +10,7 @@ transactions_per_day = 60
 current_date = datetime.date.today()
 
 transaction_ids = [f'T{str(i).zfill(5)}' for i in range(1, 101)]  # Generate T00001 to T00100
+used_transaction_ids = set()  # To track used transaction IDs
 product_ids = [fake.unique.bothify("P####") for _ in range(30)]
 customer_ids = [fake.unique.bothify("C####") for _ in range(50)]
 product_with_prices = {product: round(random.uniform(20, 100), 2) for product in product_ids}
@@ -23,18 +24,22 @@ def get_product_price(product_id):
         return 0.00
 
 transaction_information = {}
+
 def generate_one_transaction(customer_id, current_date):
-    if customer_id not in transaction_information:
-        transaction_information[customer_id] = {
-        }
-    transaction_data = transaction_information[customer_id].copy()
+    transaction_data = {}
     transaction_data["CustomerID"] = customer_id
-    transaction_data["TransactionID"] = random.choice(transaction_ids)
+    # Ensure unique TransactionID
+    while True:
+        transaction_id = random.choice(transaction_ids)
+        if transaction_id not in used_transaction_ids:
+            used_transaction_ids.add(transaction_id)
+            transaction_data["TransactionID"] = transaction_id
+            break
     transaction_data["Date"] = str(current_date)
     transaction_data["ProductID"] = random.choice(product_ids)
     transaction_data["Quantity"] = random.randint(1, 5)
     price = get_product_price(transaction_data["ProductID"])
-    transaction_data["Price"] = round(price * transaction_data["Quantity"],2)
+    transaction_data["Price"] = round(price * transaction_data["Quantity"], 2)
     transaction_data["StoreLocation"] = random.choice(store_location)
 
     return transaction_data
